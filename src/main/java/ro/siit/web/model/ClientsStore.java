@@ -28,9 +28,9 @@ public class ClientsStore {
         clients.add(client);
     }
 
-    public void updateClient(Client updatedClient){
+    public void updateClient(UUID clientId, Client updatedClient){
         for (Client client: clients) {
-            if(client.getId().equals(updatedClient.getId())){
+            if(client.getId().equals(clientId)){
                 client.setName(updatedClient.getName());
                 client.setPhoneNumber(updatedClient.getPhoneNumber());
                 break;

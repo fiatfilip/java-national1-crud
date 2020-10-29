@@ -12,6 +12,7 @@
         </style>
     </head>
     <body>
+        <a href="?action=ADD">ADD</a>
         <table>
             <tr>
                 <th>Name</th>
@@ -27,7 +28,8 @@
                         <c:out value="${client.phoneNumber}"/>
                     </td>
                     <td>
-                        Edit | Delete
+                        <a href="?action=EDIT&id=${client.id}">Edit</a> |
+                        <a href="?action=DELETE&id=${client.id}">Delete</a>
                     </td>
                 </tr>
             </c:forEach>
