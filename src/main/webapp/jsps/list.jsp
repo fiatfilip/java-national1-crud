@@ -31,6 +31,9 @@
                 <c:forEach var="client" items="${requestScope.clients}">
                     <tr>
                         <td>
+                            <c:out value="${client.avatar}"/>
+                        </td>
+                        <td>
                            <c:out value="${client.name}"/>
                         </td>
                         <td>

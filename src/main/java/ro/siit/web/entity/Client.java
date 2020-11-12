@@ -6,6 +6,7 @@ public class Client {
     private UUID id;
     private String name;
     private String phoneNumber;
+    private String avatar;
 
     public Client(String name, String phoneNumber) {
         this.id = UUID.randomUUID();
@@ -17,6 +18,13 @@ public class Client {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
+    }
+
+    public Client(UUID id, String name, String phoneNumber, String avatar) {
+        this.id = id;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.avatar = avatar;
     }
 
     public String getName() {

@@ -19,6 +19,8 @@
         <input type="text" name="name" value="${requestScope.client.name}">
         <label>Phone number</label>
         <input type="text" name="phoneNr" value="${requestScope.client.phoneNumber}">
+        <label>Avatar</label>
+        <input type="file" name="avatar">
         <input type="submit" value="Update">
     </form>
 

@@ -11,12 +11,14 @@
     <title>Title</title>
 </head>
 <body>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <input type="hidden" name="action" value="ADD">
         <label>Name</label>
         <input type="text" name="name">
         <label>Phone number</label>
         <input type="text" name="phoneNr">
+        <label>Avatar</label>
+        <input type="file" name="avatar">
         <input type="submit" value="ADD">
     </form>
 

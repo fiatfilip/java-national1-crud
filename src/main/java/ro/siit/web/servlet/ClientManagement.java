@@ -1,24 +1,37 @@
 package ro.siit.web.servlet;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ro.siit.web.entity.Client;
 import ro.siit.web.model.ClientsStore;
 import ro.siit.web.model.DBClientsStore;
 import ro.siit.web.model.Store;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.UUID;
 
+@MultipartConfig(fileSizeThreshold=1024*1024,
+        maxFileSize=1024*1024*5, maxRequestSize=1024*1024*5*5)
 @WebServlet(urlPatterns = {"/clients"})
 public class ClientManagement extends HttpServlet {
     private Store store;
+    private String uploadPath;
+    static final Logger logger = LogManager.getLogger(ClientManagement.class.getName());
     @Override
     public void init() {
         store = new DBClientsStore();
+        uploadPath = getServletContext().getRealPath("") + File.separator + "UPLOAD_DIRECTORY";
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) uploadDir.mkdir();
     }
 
     @Override
@@ -55,7 +68,13 @@ public class ClientManagement extends HttpServlet {
             case "ADD":
                 String name = req.getParameter("name");
                 String phone = req.getParameter("phoneNr");
-                store.addClient(new Client(name, phone));
+                Part avatar =  req.getPart("avatar");
+                UUID clientId = UUID.randomUUID();
+                String avatarName = avatar.getSubmittedFileName();
+                String storedAvatarName = clientId + avatarName.substring(avatarName.indexOf("."));
+                avatar.write(uploadPath + File.separator + storedAvatarName);
+
+                store.addClient(new Client(UUID.randomUUID(), name, phone, avatarName));
                 forwardToList(req, resp);
                 break;
             case "EDIT":
