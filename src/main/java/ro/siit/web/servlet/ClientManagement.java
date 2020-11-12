@@ -2,6 +2,8 @@ package ro.siit.web.servlet;
 
 import ro.siit.web.entity.Client;
 import ro.siit.web.model.ClientsStore;
+import ro.siit.web.model.DBClientsStore;
+import ro.siit.web.model.Store;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,10 +15,10 @@ import java.util.UUID;
 
 @WebServlet(urlPatterns = {"/clients"})
 public class ClientManagement extends HttpServlet {
-    private ClientsStore store;
+    private Store store;
     @Override
     public void init() {
-        store = new ClientsStore();
+        store = new DBClientsStore();
     }
 
     @Override

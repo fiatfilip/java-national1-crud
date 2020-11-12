@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class ClientsStore {
+public class ClientsStore implements Store{
 
     private List<Client> clients = new ArrayList<>();
 
